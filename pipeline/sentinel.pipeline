@@ -1,0 +1,309 @@
+{
+  "doc_type": "pipeline",
+  "version": "3.0",
+  "json_schema": "http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json",
+  "id": "elyra-auto-generated-pipeline",
+  "primary_pipeline": "primary",
+  "pipelines": [
+    {
+      "id": "primary",
+      "nodes": [
+        {
+          "id": "fb2aa7fb-f617-4840-ae29-71f5d69c20ad",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "dependencies": [],
+              "include_subdirectories": false,
+              "outputs": [],
+              "env_vars": [
+                {
+                  "env_var": "S3_ENDPOINT"
+                },
+                {
+                  "env_var": "S3_ACCESS_KEY"
+                },
+                {
+                  "env_var": "S3_SECRET_KEY"
+                }
+              ],
+              "kubernetes_pod_annotations": [],
+              "kubernetes_pod_labels": [],
+              "kubernetes_secrets": [],
+              "kubernetes_shared_mem_size": {},
+              "kubernetes_tolerations": [],
+              "mounted_volumes": [],
+              "filename": "generate-data.ipynb",
+              "runtime_image": "registry.redhat.io/rhoai/odh-pipeline-runtime-datascience-cpu-py312-rhel9@sha256:193f4f0fa3db8f11faf146b61dde02f6109aff084330cf8b0510a35c3b357082"
+            },
+            "label": "",
+            "ui_data": {
+              "label": "generate-data.ipynb",
+              "image": "/notebook/sentinel-t-moviles/sentinel-t-moviles-wb/static/elyra/notebook.svg",
+              "x_pos": 83,
+              "y_pos": 108,
+              "description": "Run notebook file"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              }
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "338ef729-e58d-4382-85eb-931f44ba31ae",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "dependencies": [],
+              "include_subdirectories": false,
+              "outputs": [
+                "modelo_pytorch.tar.gz"
+              ],
+              "env_vars": [],
+              "kubernetes_pod_annotations": [],
+              "kubernetes_pod_labels": [],
+              "kubernetes_secrets": [],
+              "kubernetes_shared_mem_size": {},
+              "kubernetes_tolerations": [
+                {
+                  "key": "nvidia.com/gpu",
+                  "operator": "Equal",
+                  "value": "True",
+                  "effect": "NoSchedule"
+                }
+              ],
+              "mounted_volumes": [],
+              "filename": "training.ipynb",
+              "runtime_image": "registry.redhat.io/rhoai/odh-pipeline-runtime-pytorch-cuda-py312-rhel9@sha256:68d648af929e0821339b638a46f206511c381fc28ddfbce351c824aea49c9240",
+              "gpu": 1
+            },
+            "label": "",
+            "ui_data": {
+              "label": "training.ipynb",
+              "image": "/notebook/sentinel-t-moviles/sentinel-t-moviles-wb/static/elyra/notebook.svg",
+              "x_pos": 379,
+              "y_pos": 113,
+              "description": "Run notebook file"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              },
+              "links": [
+                {
+                  "id": "4cd3392a-1073-4a4e-a9e4-b08ee458ffa0",
+                  "node_id_ref": "fb2aa7fb-f617-4840-ae29-71f5d69c20ad",
+                  "port_id_ref": "outPort"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "6d543a72-738e-44f9-a4f9-ef9131675eef",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "dependencies": [],
+              "include_subdirectories": false,
+              "outputs": [
+                "modelo_onnx.tar.gz"
+              ],
+              "env_vars": [],
+              "kubernetes_pod_annotations": [],
+              "kubernetes_pod_labels": [],
+              "kubernetes_secrets": [],
+              "kubernetes_shared_mem_size": {},
+              "kubernetes_tolerations": [],
+              "mounted_volumes": [],
+              "filename": "convert-onnx.ipynb",
+              "runtime_image": "registry.redhat.io/rhoai/odh-pipeline-runtime-datascience-cpu-py312-rhel9@sha256:193f4f0fa3db8f11faf146b61dde02f6109aff084330cf8b0510a35c3b357082"
+            },
+            "label": "",
+            "ui_data": {
+              "label": "convert-onnx.ipynb",
+              "image": "/notebook/sentinel-t-moviles/sentinel-t-moviles-wb/static/elyra/notebook.svg",
+              "x_pos": 413,
+              "y_pos": 259,
+              "description": "Run notebook file"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              },
+              "links": [
+                {
+                  "id": "2747ca85-133d-4a9f-97a1-b7a717612bf2",
+                  "node_id_ref": "338ef729-e58d-4382-85eb-931f44ba31ae",
+                  "port_id_ref": "outPort"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "56279ecb-2d5e-42fb-ab18-89b623d0b4c6",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "dependencies": [],
+              "include_subdirectories": false,
+              "outputs": [
+                "deployed_version.txt"
+              ],
+              "env_vars": [],
+              "kubernetes_pod_annotations": [],
+              "kubernetes_pod_labels": [],
+              "kubernetes_secrets": [],
+              "kubernetes_shared_mem_size": {},
+              "kubernetes_tolerations": [],
+              "mounted_volumes": [],
+              "filename": "upload-s3.ipynb",
+              "runtime_image": "registry.redhat.io/rhoai/odh-pipeline-runtime-datascience-cpu-py312-rhel9@sha256:193f4f0fa3db8f11faf146b61dde02f6109aff084330cf8b0510a35c3b357082"
+            },
+            "label": "",
+            "ui_data": {
+              "label": "upload-s3.ipynb",
+              "image": "/notebook/sentinel-t-moviles/sentinel-t-moviles-wb/static/elyra/notebook.svg",
+              "x_pos": 407,
+              "y_pos": 406,
+              "description": "Run notebook file"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              },
+              "links": [
+                {
+                  "id": "b699a908-b128-4c3a-9587-f96b6963f743",
+                  "node_id_ref": "6d543a72-738e-44f9-a4f9-ef9131675eef",
+                  "port_id_ref": "outPort"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "app_data": {
+        "ui_data": {
+          "comments": []
+        },
+        "version": 8,
+        "runtime_type": "KUBEFLOW_PIPELINES",
+        "properties": {
+          "name": "sentinel",
+          "runtime": "Data Science Pipelines",
+          "pipeline_defaults": {
+            "mounted_volumes": [],
+            "kubernetes_shared_mem_size": {},
+            "kubernetes_pod_annotations": [],
+            "kubernetes_pod_labels": [],
+            "kubernetes_tolerations": [],
+            "kubernetes_secrets": [],
+            "env_vars": []
+          }
+        }
+      },
+      "runtime_ref": ""
+    }
+  ],
+  "schemas": []
+}

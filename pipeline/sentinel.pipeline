@@ -41,8 +41,8 @@
             "ui_data": {
               "label": "generate-data.ipynb",
               "image": "/notebook/sentinel-t-moviles/sentinel-t-moviles-wb/static/elyra/notebook.svg",
-              "x_pos": 83,
-              "y_pos": 108,
+              "x_pos": 322,
+              "y_pos": 97,
               "description": "Run notebook file"
             }
           },
@@ -108,8 +108,8 @@
             "ui_data": {
               "label": "training.ipynb",
               "image": "/notebook/sentinel-t-moviles/sentinel-t-moviles-wb/static/elyra/notebook.svg",
-              "x_pos": 379,
-              "y_pos": 113,
+              "x_pos": 326,
+              "y_pos": 231,
               "description": "Run notebook file"
             }
           },
@@ -174,8 +174,8 @@
             "ui_data": {
               "label": "convert-onnx.ipynb",
               "image": "/notebook/sentinel-t-moviles/sentinel-t-moviles-wb/static/elyra/notebook.svg",
-              "x_pos": 413,
-              "y_pos": 259,
+              "x_pos": 333,
+              "y_pos": 390,
               "description": "Run notebook file"
             }
           },
@@ -240,8 +240,8 @@
             "ui_data": {
               "label": "upload-s3.ipynb",
               "image": "/notebook/sentinel-t-moviles/sentinel-t-moviles-wb/static/elyra/notebook.svg",
-              "x_pos": 407,
-              "y_pos": 406,
+              "x_pos": 340,
+              "y_pos": 532,
               "description": "Run notebook file"
             }
           },
